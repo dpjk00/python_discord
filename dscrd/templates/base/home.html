@@ -4,9 +4,12 @@
 <h1>Home Template</h1>
 
 <div>
+
     <div>
         {% for channel in channels %}
             <div>
+                <a href="{% url 'update_channel' channel.id %}">Edit</a>
+                <a href="{% url 'delete_channel' channel.id %}">Delete</a>
                 <span>@{{channel.host.username}}</span>
                 <h5>{{channel.id}} -- <a href="{% url 'channel' channel.id %}">{{channel.name}}</h5></a>
                 <small>{{channel.topic.name}}</small>
