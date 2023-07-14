@@ -6,11 +6,35 @@
     <title>Discord Project</title>
 </head>
 <body>
-    {% include 'sub_navbar.html' %}
+    
+    <style>
 
-    {% block content %}
+        main {
+            width: 100%;
+            height: auto;
+            background: #232323;
+            display: flex;
+            flex-direction: row;
+        }
 
-    {% endblock %}
+    </style>
+    
+    
+    <main>
+        {% include 'sub_navbar.html' %}
+    
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% block content %}
+    
+        {% endblock %}
+    </main>
 
 </body>
 </html>

@@ -1,22 +1,67 @@
 {% extends 'main.html' %}
 
+
 {% block content %}
-<h1>Home Template</h1>
 
-<div>
+<style>
 
-    <div>
-        {% for channel in channels %}
+    .main-home {
+        width: 96vw;
+        height: 100vh;
+        display: flex;
+    }
+    
+    .main-home-content {
+        width: 100%;
+        height: auto;
+        color: white;
+    }
+
+    .main-home-content-topics {
+        width: 100%;
+        background: gray;
+    }
+    
+</style>
+
+<div class="main-home">
+    <div class="main-home-content">
+        <div class="main-home-content-topics">
             <div>
+                <a href="{% url 'home' %}">All</a>
+            </div>
+            {% for topic in topics %}
+            <div class="">
+                <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% if request.user.is_authenticated %}
+        <p>Hello {{request.user}}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+        <div>
+            <h5>{{channel_count}} channels available</h5>
+            <a href="{% url 'create_channel' %}">Create Channel</a>
+            <form method="GET" action="{% url 'home' %}">
+                <input type="text" name="q" placeholder="Search Channels...">
+            </form>
+            {% for channel in channels %}
+            <div>
+                {% if request.user == channel.host %}
                 <a href="{% url 'update_channel' channel.id %}">Edit</a>
                 <a href="{% url 'delete_channel' channel.id %}">Delete</a>
-                <span>@{{channel.host.username}}</span>
-                <h5>{{channel.id}} -- <a href="{% url 'channel' channel.id %}">{{channel.name}}</h5></a>
-                <small>{{channel.topic.name}}</small>
-                <hr>
+                {% endif %}
+                <h1>{{channel.name}}</h1>
+                <p>@{{channel.host}}</p>
+                <p>{{channel.description}}</p>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
+
 
 {% endblock %}
