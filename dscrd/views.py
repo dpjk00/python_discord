@@ -93,7 +93,7 @@ def channel(request, pk):
     return render(request, 'base/channel.html', context)
 
 @login_required(login_url='login')
-def create_channel(request, pk):
+def create_channel(request):
     form = ChannelForm()
     if request.method == 'POST':
         form = ChannelForm(request.POST)

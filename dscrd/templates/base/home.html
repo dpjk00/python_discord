@@ -90,13 +90,13 @@
             <h5>{{channel_count}} channels available</h5>
             {% for channel in channels %}
             <div>
+                <h1><a href="{% url 'channel' channel.id %}">{{channel.name}}</a></h1>
+                <p>@{{channel.host}}</p>
+                <p>{{channel.description}}</p>
                 {% if request.user == channel.host %}
                 <a href="{% url 'update_channel' channel.id %}">Edit</a>
                 <a href="{% url 'delete_channel' channel.id %}">Delete</a>
                 {% endif %}
-                <h1>{{channel.name}}</h1>
-                <p>@{{channel.host}}</p>
-                <p>{{channel.description}}</p>
             </div>
             {% endfor %}
         </div>
