@@ -6,20 +6,35 @@
     }
 
     .channel-bar {
-        width: 4vw;
-        height: 100vh;
+        width: 100%;
+        height: 4vh;
         background: #171717;
         display: flex;
-        flex-direction: column;
         align-items: center;
     }
 
     .channel-bar-container {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        width: 3vw;
-        height: 100vh;
+        justify-content: flex-end;
+        width: 100%;
+        height: 4vh;
+    }
+
+    .channel-bar-container p {
+        margin-right: 30px;
+        color: white;
+    }
+
+    .channel-bar-container a {
+        margin-right: 20px;
+        text-decoration: none;
+        padding: 5px;
+        background: crimson;
+    }
+
+    .channel-bar-container a:visited {
+        color: white;
     }
 
     .discord-logo {
@@ -31,60 +46,6 @@
         padding: 10px;
     }
     
-    .channel-item {
-        background-color: crimson;
-        width: 100%;
-        height: auto;
-        border-radius: 50%;
-        padding-top: 100%;
-        position: relative;
-        margin-top: 10px;
-        cursor: pointer;
-    }
-
-    .create-channel-item::after {
-        content: " ";
-        position: absolute;
-        display: block;
-        background-color: #fff;
-        height: 5px;
-        margin-top: -5px;
-        top: 50%;
-        left: 5px;
-        right: 5px;
-        z-index: 9;
-    }
-
-    .create-channel-item::before {
-        content: " ";
-        position: absolute;
-        display: block;
-        background-color: #fff;
-        width: 5px;
-        margin-left: -5px;
-        left: 50%;
-        top: 5px;
-        bottom: 5px;
-        z-index: 9;
-    }
-
-    .channel-item-link {
-        z-index: 10;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        border-radius: 50%;
-        transform: translateY(-100%);
-    }
-
-    hr {
-        width: 50%;
-        height: 2px;
-        background: white;
-        margin-left: auto;
-        margin-right: auto;
-        border: none;
-    }
 
 </style>
 
@@ -92,16 +53,12 @@
     <a class="discord-logo" href="/">
         <h6>discord</h6>
     </a>
-    <hr>
     <div class="channel-bar-container">
-        <div class="channel-item create-channel-item">
-            <a class="channel-item-link" href="{% url 'create_channel' %}"></a>
-        </div>
-
-        {% for channel in channels %}
-        <div class="channel-item">
-            <a class="channel-item-link" href="{% url 'channel' channel.id %}"></a>
-        </div>
-        {% endfor %}
+        {% if request.user.is_authenticated %}
+        <p>{{request.user}}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
     </div>
 </div>

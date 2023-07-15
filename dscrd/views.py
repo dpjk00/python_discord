@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .models import Channel, Topic, Message
+from .models import Channel, Topic, Message, User3
 from .forms import ChannelForm
 
 def register_user(request):
@@ -63,8 +63,15 @@ def home(request):
         Q(description__icontains = q))
     topics = Topic.objects.all()
 
+    joined_channels = Channel.objects.all()
+
     channel_count = channels.count()
-    context = {'channels': channels, 'topics': topics, 'channel_count': channel_count}
+    context = {
+        'channels': channels, 
+        'topics': topics, 
+        'channel_count': channel_count,
+        'joined_channels': joined_channels,
+    }
     return render(request, 'base/home.html', context)
 
 def channel(request, pk):
@@ -86,7 +93,7 @@ def channel(request, pk):
     return render(request, 'base/channel.html', context)
 
 @login_required(login_url='login')
-def create_channel(request):
+def create_channel(request, pk):
     form = ChannelForm()
     if request.method == 'POST':
         form = ChannelForm(request.POST)

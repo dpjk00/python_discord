@@ -15,11 +15,55 @@
         width: 100%;
         height: auto;
         color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .main-home-content-topics {
         width: 100%;
-        background: gray;
+        display: flex;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .topic {
+        display: flex;
+        background: crimson;
+        color: white;
+        padding: 5px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    .topic a {
+        text-decoration: none;
+    }
+
+    .topic a:visited {
+        color: white;
+    }
+
+    .main-home-wrapper {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        width: 60%;
+        color: #303030;
+    }
+
+    .main-home-search-wrapper {
+        width: 100%;
+        background: pink;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .main-home-search-wrapper-input {
+        width: 600px;
+
     }
     
 </style>
@@ -27,27 +71,23 @@
 <div class="main-home">
     <div class="main-home-content">
         <div class="main-home-content-topics">
-            <div>
+            <div class="topic">
                 <a href="{% url 'home' %}">All</a>
             </div>
             {% for topic in topics %}
-            <div class="">
+            <div class="topic">
                 <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
             </div>
             {% endfor %}
         </div>
-        {% if request.user.is_authenticated %}
-        <p>Hello {{request.user}}</p>
-        <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-        <div>
+        <div class="main-home-wrapper">
+            <div class="main-home-search-wrapper">
+                <form method="GET" action="{% url 'home' %}">
+                    <input class="main-home-search-wrapper-input" type="text" name="q" placeholder="Search Channels...">
+                </form>
+                <a href="{% url 'create_channel' %}">Create Channel</a>
+            </div>
             <h5>{{channel_count}} channels available</h5>
-            <a href="{% url 'create_channel' %}">Create Channel</a>
-            <form method="GET" action="{% url 'home' %}">
-                <input type="text" name="q" placeholder="Search Channels...">
-            </form>
             {% for channel in channels %}
             <div>
                 {% if request.user == channel.host %}

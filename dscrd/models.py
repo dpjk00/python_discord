@@ -22,6 +22,12 @@ class Channel(models.Model):
     def __str__(self):
         return self.name
     
+class User2(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    channels = models.ManyToManyField(Channel, related_name='channels', blank=True)
+
+class User3(User, models.Model):
+    channels = models.ManyToManyField(Channel, related_name='channels2', blank=True)
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

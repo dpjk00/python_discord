@@ -9,40 +9,121 @@
     }
 
     .channel-container {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
+
+    .channel-info-container {
+        background-color: white;
+        padding: 50px;
+        border-radius: 30px;
+        margin-top: 50px;
+        width: 60%;
+        color: black;
+        font-family: Roboto;
+    }
+
+    .channel-info-title {
+        margin-bottom: 30px;
+    }
+
+    .channel-info-title h1 {
+        margin-bottom: 20px;
+        font-size: 50px;
+    }
+
+    .channel-member-container {
+        background: white;
+        color: black;
+        font-family: Roboto;
+        padding: 30px;
+        border-radius: 30px;
+        margin-top: 50px;
+        margin-left: 30px;
+    }
+
+    .channel-hr {
+        border: none;
+        background: black;
+        height: 1px;
+    }
+
+    .comment-wrapper {
+        padding: 20px;
+    }
+
+    .comment-wrapper h3 {
+        font-size: 35px;
+    }
+
+    .channel-comment {
+        margin: 10px 0;
+    }
+
+    .channel-comment-user {
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+    }
+
+    .channel-comment-body {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .comment-input {
+        margin-top: 20px;
+        width: 96%;
+        border: 2px solid #303030;
+        border-radius: 30px;
+        padding: 4px 2%;
+        height: 40px;
+    }
+
+    .comment-input:focus {
+        outline: 0;
+    }
+
 </style>
 
 <div class="channel-container">
-    <div>
-        <h1>{{channel.name}}</h1>
-        <p>{{channel.description}}</p>
-
+    <div class="channel-info-container">
+        <div class="channel-info-title">
+            <h1>{{channel.name}}</h1>
+            <p>{{channel.description}}</p>
+        </div>
+        <hr class="channel-hr">
         <div class="comment-wrapper">
             <h3>Chat</h3>
-            <hr>
+            <hr class="channel-hr">
             {% for message in room_messages %}
-                <div>
-                    {% if request.user == message.user %}
-                    <a href="{% url 'delete_message' message.id %}">Delete</a>
-                    {% endif %}
-                    <div>@{{message.user}}  {{message.created|timesince}} ago</div>
-                    <p>{{message.message}}</p>
-                    <hr>
+                <div class="channel-comment">
+                    <div class="channel-comment-user">
+                        <div>@{{message.user}}</div>
+                        <div>{{message.created|timesince}} ago</div>
+                    </div>
+                    <div class="channel-comment-body">
+                        <p>{{message.message}}</p>
+                        {% if request.user == message.user %}
+                        <a href="{% url 'delete_message' message.id %}">Delete</a>
+                        {% endif %}
+                    </div>
                 </div>
+                <hr>
             {% endfor %}
+            {% if request.user.is_authenticated %}
+            <div class="chat-form">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input class="comment-input" type="text" name="message" placeholder="Write your message">
+                </form>
+            </div>
+            {% endif %}
         </div>
-        {% if request.user.is_authenticated %}
-        <div class="chat-form">
-            <form action="" method="POST">
-                {% csrf_token %}
-                <input type="text" name="message" placeholder="Write you message">
-            </form>
-        </div>
-        {% endif %}
     </div>
-    <div>
+    <div class="channel-member-container">
         <h3>Channel Members</h3>
         <hr>
 
