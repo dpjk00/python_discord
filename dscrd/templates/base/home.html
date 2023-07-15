@@ -47,25 +47,53 @@
     }
 
     .main-home-wrapper {
-        background: white;
         padding: 30px;
         border-radius: 20px;
-        width: 60%;
+        width: 50%;
         color: #303030;
     }
 
     .main-home-search-wrapper {
         width: 100%;
-        background: pink;
         display: flex;
         justify-content: space-between;
     }
 
-    .main-home-search-wrapper-input {
-        width: 600px;
+    .main-home-search-wrapper form {
+        width: 100%;
+    }
 
+    .main-home-search-wrapper-input {
+        width: 60%;
+        border: 1px solid #303030;
+        border-radius: 20px;
+        height: 40px;
+        padding: 0 15px;
+    }
+
+    .channel-item {
+        background: white;
+        margin-top: 30px;
+        border-radius: 30px;
+        padding: 30px;
+    }
+
+    .channel-item-bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
     }
     
+    .channel-item-bottom a {
+        text-decoration: none;
+    }
+
+    .create-channel-div a {
+        color: #303030;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
 </style>
 
 <div class="main-home">
@@ -85,18 +113,18 @@
                 <form method="GET" action="{% url 'home' %}">
                     <input class="main-home-search-wrapper-input" type="text" name="q" placeholder="Search Channels...">
                 </form>
-                <a href="{% url 'create_channel' %}">Create Channel</a>
+                <div class="create-channel-div">
+                    <a href="{% url 'create_channel' %}">Create Channel</a>
+                </div>
             </div>
             <h5>{{channel_count}} channels available</h5>
             {% for channel in channels %}
-            <div>
-                <h1><a href="{% url 'channel' channel.id %}">{{channel.name}}</a></h1>
-                <p>@{{channel.host}}</p>
-                <p>{{channel.description}}</p>
-                {% if request.user == channel.host %}
-                <a href="{% url 'update_channel' channel.id %}">Edit</a>
-                <a href="{% url 'delete_channel' channel.id %}">Delete</a>
-                {% endif %}
+            <div class="channel-item">
+                <h1>{{channel.name}}</h1>
+                <div class="channel-item-bottom">
+                    <p>created by @{{channel.host}}</p>
+                    <a href="{% url 'channel' channel.id %}">Join</a>
+                </div>
             </div>
             {% endfor %}
         </div>

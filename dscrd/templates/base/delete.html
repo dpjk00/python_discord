@@ -2,11 +2,47 @@
 
 {% block content %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{obj}}"?</p>
-    <a href="{{request.META.HTTP_REFERER}}">Go back</a>
-    <input type="submit"  value="Confirm"/>
-</form>
+<style>
+    .main-delete {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main-delete-wrapper {
+        margin-bottom: 300px;
+        font-size: 30px;
+    }
+
+    .delete-input {
+        padding: 10px 20px;
+        border: none;
+        font-size: 20px;
+        background: crimson;
+        color: white;
+        cursor: pointer;
+    }
+
+    .main-delete-bottom {
+        display: flex;
+        margin-top: 22px;
+        justify-content: space-around;
+    }
+</style>
+
+<div class="main-delete">
+    <div class="main-delete-wrapper">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{obj}}"?</p>
+            <div class="main-delete-bottom">
+                <a href="{{request.META.HTTP_REFERER}}">Go back</a>
+                <input class="delete-input" type="submit"  value="Confirm"/>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock content %}

@@ -74,11 +74,15 @@ def home(request):
     }
     return render(request, 'base/home.html', context)
 
+@login_required(login_url='login')
 def channel(request, pk):
     channel = Channel.objects.get(id=pk)
     channels = Channel.objects.all()
     room_messages = channel.message_set.all()
     members = channel.members.all()
+
+    if request.method == 'GET':
+        channel.members.add(request.user)
 
     if request.method == 'POST':
         user_message = Message.objects.create(
@@ -95,21 +99,29 @@ def channel(request, pk):
 @login_required(login_url='login')
 def create_channel(request):
     form = ChannelForm()
+    topics = Topic.objects.all()
     if request.method == 'POST':
-        form = ChannelForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+
+        Channel.objects.create(
+            host=request.user,
+            topic=topic,
+            name=request.POST.get('name'),
+            description=request.POST.get('description'),
+        )
+        return redirect('home')
 
     channels = Channel.objects.all()
-    context = {'form': form, 'channels': channels}
+    context = {'form': form, 'channels': channels, 'topics': topics}
     return render(request, 'base/channel_form.html', context)
 
 @login_required(login_url='login')
 def update_channel(request, pk):
     channel = Channel.objects.get(id=pk)
     form = ChannelForm(instance=channel)
-    
+    topics = Topic.objects.all()
+
     if request.user != channel.host:
         return HttpResponse("You are not allowed here")
 
@@ -119,7 +131,7 @@ def update_channel(request, pk):
             form.save()
             return redirect('home')
 
-    context = {'form': form}
+    context = {'form': form, 'topics': topics}
     return render(request, 'base/channel_form.html', context)
 
 @login_required(login_url='login')
@@ -143,5 +155,5 @@ def delete_message(request, pk):
 
     if request.method == 'POST':
         message.delete()
-        return redirect('home')
+        return redirect('request.META.HTTP_REFERER')
     return render(request, 'base/delete.html', {"obj": message})

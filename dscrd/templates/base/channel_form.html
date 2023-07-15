@@ -3,14 +3,72 @@
 {% block content %}
 
 <style>
+    .channel-form-container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .channel-form-wrapper {
+        margin-top: 100px;
+        display: flex;
+        padding: 50px;
+        background: #303030;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+    }
+
+    .channel-form-wrapper-input {
+        border: none;
+        background: crimson;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .form-item {
+        display: flex;
+        color: white;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .form-item input {
+        padding: 0 10px;
+        height: 30px;
+        border: none;
+    }
 </style>
 
-<div>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Submit" />
-    </form>
+<div class="channel-form-container">
+    <div class="channel-form-wrapper">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-item">
+                <label for="channel-name">Channel Name</label>
+                {{form.name}}
+            </div>
+            <div class="form-item">
+                <label for="channel-name">Channel topic</label>
+                <input required type="text" name="topic" list="topic-list" />
+                <datalist id="topic-list">
+                    <select name="" id="channel-topic">
+                        {% for topic in topics %}
+                        <option value="{{topic.name}}">{{topic.name}}</option>
+                        {% endfor %}
+                    </select>
+                </datalist>
+            </div>
+            <div class="form-item">
+                <label for="channel-name">Channel description</label>
+                {{form.description}}
+            </div>     
+            <input class="channel-form-wrapper-input" type="submit" value="Submit" />
+        </form>
+    </div>
 </div>
 
 {% endblock content %}

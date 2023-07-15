@@ -6,6 +6,7 @@
     *, html, body {
         margin: 0;
         padding: 0;
+        font-family: 'Roboto', sans-serif;
     }
 
     .channel-container {
@@ -47,6 +48,7 @@
         border: none;
         background: black;
         height: 1px;
+        margin-bottom: 20px;
     }
 
     .comment-wrapper {
@@ -94,10 +96,13 @@
             <h1>{{channel.name}}</h1>
             <p>{{channel.description}}</p>
         </div>
+        {% if request.user == channel.host %}
+        <a href="{% url 'update_channel' channel.id %}">Edit</a>
+        <a href="{% url 'delete_channel' channel.id %}">Delete</a>
+        {% endif %}
         <hr class="channel-hr">
         <div class="comment-wrapper">
             <h3>Chat</h3>
-            <hr class="channel-hr">
             {% for message in room_messages %}
                 <div class="channel-comment">
                     <div class="channel-comment-user">

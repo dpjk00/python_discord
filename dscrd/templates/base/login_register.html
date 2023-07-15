@@ -2,31 +2,103 @@
 
 {% block content %}
 
+
+<style>
+    .user-form-container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-form-wrapper {
+        margin-top: 100px;
+        display: flex;
+        padding: 50px;
+        background: #303030;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        color: white;
+    }
+
+    .user-form-wrapper p {
+        margin-top: 30px;
+    }
+
+    .user-form-wrapper a {
+        color: crimson;
+        margin-top: 10px;
+        text-decoration: none;
+    }
+    
+
+    .user-form-wrapper-input {
+        border: none;
+        background: crimson;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .user-form-item {
+        display: flex;
+        color: white;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .user-form-item input {
+        padding: 0 10px;
+        height: 30px;
+        border: none;
+    }
+
+</style>
+
 {% if page == 'login' %}
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
+<div class="user-form-container">
+    <div class="user-form-wrapper">
+        <form method="POST" action="">
+            {% csrf_token %}
 
-        <label>Username</label>
-        <input type="text" name="username" placeholder="Username">
-
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Password">
-
-        <input type="submit" value="Login">
-    </form>
-    <p>Haven't singed up yet?</p>
-    <a href="{% url 'register' %}">Sing up</a>
+            <div class="user-form-item">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="user-form-item">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <input class="user-form-wrapper-input" type="submit" value="Login">
+        </form>
+        <p>Haven't singed up yet?</p>
+        <a href="{% url 'register' %}">Sing up</a>
+    </div>
 </div>
 {% else %}
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Register">
-    </form>
-    <p>Already singed up yet?</p>
-    <a href="{% url 'login' %}">Login</a>
+<div class="user-form-container">
+    <div class="user-form-wrapper">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="user-form-item">
+                <label for="user-username">Username</label>
+                {{form.username}}
+            </div>
+            <div class="user-form-item">
+                <label for="user-username">Password</label>
+                {{form.password1}}
+            </div>
+            <div class="user-form-item">
+                <label for="user-username">Confirm Password</label>
+                {{form.password2}}
+            </div> 
+            <input class="user-form-wrapper-input" type="submit" value="Register">
+        </form>
+        <p>Do you have an account?</p>
+        <a href="{% url 'login' %}">Login</a>
+    </div>
 </div>
 {% endif %}
 {% endblock content %}
