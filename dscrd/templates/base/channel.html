@@ -111,7 +111,7 @@
                     </div>
                     <div class="channel-comment-body">
                         <p>{{message.message}}</p>
-                        {% if request.user == message.user %}
+                        {% if request.user == message.user or request.user.is_superuser %}
                         <a href="{% url 'delete_message' message.id %}">Delete</a>
                         {% endif %}
                     </div>

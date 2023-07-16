@@ -126,10 +126,13 @@ def update_channel(request, pk):
         return HttpResponse("You are not allowed here")
 
     if request.method == 'POST':
-        form = ChannelForm(request.POST, instance=channel)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+        channel.name = request.POST.get('name')
+        channel.topic = topic
+        channel.description = request.POST.get('description')
+        channel.save()
+        return redirect('home')
 
     context = {'form': form, 'topics': topics}
     return render(request, 'base/channel_form.html', context)
@@ -151,9 +154,10 @@ def delete_message(request, pk):
     message = Message.objects.get(id=pk)
 
     if request.user != message.user:
-        return HttpResponse("You are not allowed here")
-
+        if request.user.is_superuser is False:
+            return HttpResponse("You are not allowed here")
+    
     if request.method == 'POST':
         message.delete()
-        return redirect('request.META.HTTP_REFERER')
+        return redirect('home')
     return render(request, 'base/delete.html', {"obj": message})
