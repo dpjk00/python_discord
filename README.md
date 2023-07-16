@@ -40,39 +40,39 @@ Jeżeli klikniemy na "Create Channel", albo "Join", to zostaniemy odesłani do f
 Formularz prezentuje się następująco.  
 Możemy się zalogować, albo utworzyć nowe konto klikając "Sign Up".
 
-![alt](imgs/2.png)
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/2.PNG)
 
 
 Po zalogowaniu mamy dostęp do wszytkich możliwości, które oferuje nam aplikacja.
 
 
-![alt](imgs/3.png "3")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/3.PNG)
 
 Po kliknięciu "Join", zostaniemy przeniesieni do wybranego kanału.
 
 
-![alt](imgs/4.png "4")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/4.PNG)
 
 Jak widać powyżej, użytkownicy mogą usuwać swoje wiadomości, natomiast nie mogą usuwać wiadomości napisanych przez inncyh użytkowników.  
 
 Teraz spróbuje usunąć "testowa wiadomość".
 
-![alt](imgs/5.png "5")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/5.PNG)
 
 Wyświetli nam się taki komunikat, a po naciśnięciu "Confirm" wiadomość zostanie usunięta.
 
 
-![alt](imgs/6.png "6")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/6.PNG)
 
 
 Administratorzy mogą usuwać wszystkie wiadomości na każdym kanale.
 
 
-![alt](imgs/7.png "7")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/7.PNG)
 
 Jeżeli chcemy utworzyć nowy kanał, to musimy kliknąć "Create Channel" na głównej stronie lub wejść w ten link http://127.0.0.1:8000/create-channel/.
 
-![alt](imgs/8.png "8")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/8.PNG)
 
 W pierwszym inpucie wpisujemy nazwę kanału.  
 W drugim wybieramy temat kanału, możemy go wybrać z listy lub wpisać swój własny. Jeżeli zastosujemy drugi sposób, to dodamy to co wpiszemy do bazy danych.  
@@ -81,39 +81,39 @@ W trzecim wpisujemy opis kanału.
 Następnie należy kliknąć 'Submit' i kanał będzie widoczny na stronie głównej.
 
 
-![alt](imgs/9.png "9")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/9.PNG)
 
 
 Jak widać kanał został dodany, a wraz z nim temat.
 
 
-![alt](imgs/10.png "10")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/10.PNG)
 
 Jeżeli dołączymy do tego kanału to możemy ten kanał usunąć lub zmodyfikować.  
 
 Jeżeli klikniemy Edit otworzy nam się okno takie samo jak przy tworzeniu kanału i będziemy mogli zmienić dane kanału.
 
-![alt](imgs/11.png "11")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/11.PNG)
 
-![alt](imgs/12.png "12")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/12.PNG)
 
 Aby usunąć kanał należy, być twórcą tego kanału i po wejściu na kanał kliknąć "Delete". Teraz usunę "Kanał dla fanów Lorem Ipsum".
 
 
-![alt](imgs/13.png "13")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/13.PNG)
 
 Po kliknięciu Delete zostaniemy przeniesieni do takiej strony i po naciśnięciu Confirm usuniemy kanał.
 
 
 
-![alt](imgs/14.png "14")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/14.PNG)
 
 
 ### Rejestracja i logowanie poprzez API
 
 Aby się zarejestrować poprzez API, należy wejść w ten link http://127.0.0.1:8000/api/registration.  
 
-![alt](imgs/15.png "15")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/15.PNG)
 
 
 Pole "Content" musimy uzupełnić kodem JSON np.
@@ -124,16 +124,16 @@ Pole "Content" musimy uzupełnić kodem JSON np.
 }
 
 
-![alt](imgs/16.png "16")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/16.PNG)
 
 Po kliknięciu POST, użytkownik zostanie dodany do bazy danych i będziemy mogli sie zalogować na jego konto.
 
-![alt](imgs/17.png "17")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/17.PNG)
 
 
 Aby zalogować się poprzez API, należy wejść na http://127.0.0.1:8000/api/login
 
-![alt](imgs/18.png "18")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/18.PNG)
 
 Następnie poprzez format JSON, należy podać username i password np.
 
@@ -143,18 +143,18 @@ Następnie poprzez format JSON, należy podać username i password np.
 }
 
 
-![alt](imgs/19.png "19")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/19.PNG)
 
 Po kliknięciu POST, wyświetli nam sie komunikat "Login successful"
 
 
-![alt](imgs/20.png "20")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/20.PNG)
 
 
 Zostaniemy również zalogowani na konto podane w formacie JSON.
 
 
-![alt](imgs/21.png "21")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/21.PNG)
 
 
 Za pomocą API możemy też wyświetlić wszystkie istniejące kanały i użytkowników.
@@ -162,8 +162,8 @@ Za pomocą API możemy też wyświetlić wszystkie istniejące kanały i użytko
 W tym celu musimy wejść na http://127.0.0.1:8000/api/channels/ lub http://127.0.0.1:8000/api/users/
 
 
-![alt](imgs/22.png "22")
-![alt](imgs/23.png "23")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/22.PNG)
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/23.PNG)
 
 ### Testy
 
@@ -172,5 +172,5 @@ Aby zrobić test, należy w cmd wejśc w folder projektu i wpisać komendę:
 python manage.py test
 
 
-![alt](imgs/24.png "24")
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/24.PNG)
 
