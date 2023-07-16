@@ -33,7 +33,7 @@ Tak się prezentuje strona główna aplikacji.
 
 Na środku strony widać wszytkie dostępne kanały. Można je filtrowac na podstawie tematu jaki się wybiera podczas tworzenia kanału za pomocą czerwonych przycisków oraz po nazwie kanału. 
 
-![alt](python_discord/imgs/1)
+![alt](https://github.com/dpjk00/python_discord/blob/main/imgs/1.PNG)
 
 Jeżeli klikniemy na "Create Channel", albo "Join", to zostaniemy odesłani do formularza logowania.  
 
