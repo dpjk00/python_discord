@@ -17,15 +17,15 @@ Jest to bodajże "127.0.0.1:8000".
 Aplikacja jest podzielona na super użytkowników i zwykłych użytkowników.
 Obie te grupy mogą pisać wiadomości, tworzyć kanały itp.
 
-Przykładowe hasło admina:  
+**Przykładowe hasło admina:**  
 Username: superuser  
 Password: strong123
 
-Przykładowe hasło użytkownika:  
+**Przykładowe hasło użytkownika:**  
 Username: user  
 Password: strong123  
 
-Hasła są takie same, dlatego, aby łatwiej było je zapamiętać.
+Hasła są takie same, aby łatwiej było je zapamiętać.
 
 ## Prezentacja aplikacji
 
@@ -94,3 +94,83 @@ Jeżeli dołączymy do tego kanału to możemy ten kanał usunąć lub zmodyfiko
 Jeżeli klikniemy Edit otworzy nam się okno takie samo jak przy tworzeniu kanału i będziemy mogli zmienić dane kanału.
 
 ![alt](imgs/11.png "11")
+
+![alt](imgs/12.png "12")
+
+Aby usunąć kanał należy, być twórcą tego kanału i po wejściu na kanał kliknąć "Delete". Teraz usunę "Kanał dla fanów Lorem Ipsum".
+
+
+![alt](imgs/13.png "13")
+
+Po kliknięciu Delete zostaniemy przeniesieni do takiej strony i po naciśnięciu Confirm usuniemy kanał.
+
+
+
+![alt](imgs/14.png "14")
+
+
+### Rejestracja i logowanie poprzez API
+
+Aby się zarejestrować poprzez API, należy wejść w ten link http://127.0.0.1:8000/api/registration.  
+
+![alt](imgs/15.png "15")
+
+
+Pole "Content" musimy uzupełnić kodem JSON np.
+
+{
+  "username": "markdown_user",
+  "password": "markdown_password"
+}
+
+
+![alt](imgs/16.png "16")
+
+Po kliknięciu POST, użytkownik zostanie dodany do bazy danych i będziemy mogli sie zalogować na jego konto.
+
+![alt](imgs/17.png "17")
+
+
+Aby zalogować się poprzez API, należy wejść na http://127.0.0.1:8000/api/login
+
+![alt](imgs/18.png "18")
+
+Następnie poprzez format JSON, należy podać username i password np.
+
+{
+  "username": "myszkamiki",
+  "password": "strong123"
+}
+
+
+![alt](imgs/19.png "19")
+
+Po kliknięciu POST, wyświetli nam sie komunikat "Login successful"
+
+
+![alt](imgs/20.png "20")
+
+
+Zostaniemy również zalogowani na konto podane w formacie JSON.
+
+
+![alt](imgs/21.png "21")
+
+
+Za pomocą API możemy też wyświetlić wszystkie istniejące kanały i użytkowników.
+
+W tym celu musimy wejść na http://127.0.0.1:8000/api/channels/ lub http://127.0.0.1:8000/api/users/
+
+
+![alt](imgs/22.png "22")
+![alt](imgs/23.png "23")
+
+### Testy
+
+Aby zrobić test, należy w cmd wejśc w folder projektu i wpisać komendę:
+
+python manage.py test
+
+
+![alt](imgs/24.png "24")
+
