@@ -40,7 +40,7 @@ Jeżeli klikniemy na "Create Channel", albo "Join", to zostaniemy odesłani do f
 Formularz prezentuje się następująco.  
 Możemy się zalogować, albo utworzyć nowe konto klikając "Sign Up".
 
-![alt](imgs/2.png "2")
+![alt](imgs/2.png)
 
 
 Po zalogowaniu mamy dostęp do wszytkich możliwości, które oferuje nam aplikacja.
